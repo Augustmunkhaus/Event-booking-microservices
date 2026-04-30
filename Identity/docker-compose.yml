@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: eventtix-postgres
+    environment:
+      POSTGRES_USER: eventtix
+      POSTGRES_PASSWORD: eventtix
+      POSTGRES_DB: identity
+    ports:
+      - "5432:5432"
+    volumes:
+      - eventtix-postgres-data:/var/lib/postgresql/data
+
+volumes:
+  eventtix-postgres-data:
