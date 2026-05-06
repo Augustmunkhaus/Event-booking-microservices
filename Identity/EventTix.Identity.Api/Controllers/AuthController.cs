@@ -12,8 +12,12 @@ namespace EventTix.Identity.Api.Controllers;
 public class AuthController : ControllerBase
 {
     private readonly IUserService _userService;
-
-    public AuthController(IUserService userService) => _userService = userService;
+    private readonly ITokenService _tokenService;
+    public AuthController(IUserService userService, ITokenService tokenService)
+    {
+        _userService = userService;
+        _tokenService = tokenService;
+    }
     
    //equivalent to a DTO
    public record Request(string Email, string Password);
@@ -42,8 +46,8 @@ public class AuthController : ControllerBase
         { 
             return Unauthorized("Invalid username or password");
         }
-            
-        return Ok(new { user.Id, user.Email });
+        var token = _tokenService.CreateToken(user);    
+        return Ok(new { token });
     }
 }
 
