@@ -23,8 +23,7 @@ public class UserService : IUserService
         user.PasswordHash = _hasher.HashPassword(user, password);
 
         await _repo.AddAsync(user);
-        await _repo.SaveChangesAsync();
-        //do we really need 2 seperate calls here?
+        
         return user;
     }
 
