@@ -11,5 +11,9 @@ services:
     volumes:
       - eventtix-postgres-data:/var/lib/postgresql/data
 
+# To create additional databases (events, booking), run:
+#   docker exec -it eventtix-postgres psql -U eventtix -c "CREATE DATABASE events;"
+#   docker exec -it eventtix-postgres psql -U eventtix -c "CREATE DATABASE booking;"
+
 volumes:
   eventtix-postgres-data:
